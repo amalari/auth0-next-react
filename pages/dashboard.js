@@ -1,9 +1,18 @@
-import { useUser } from "@auth0/nextjs-auth0";
 import useSWR from "swr";
 import Layout from "../components/layout";
-import { useFetchUser } from "../lib/user";
 
-function Home() {
+function Dashboard() {
+  const { data, error } = useSWR("/api/users", async (url) => {
+    // const accessToken = await getAccessTokenSilently({
+    //   audience: process.env.AUTH0_CLIENT_ID,
+    //   scope: process.env.AUTH0_SCOPE,
+    // });
+    const res = await fetch(url);
+    return res.json();
+  });
+  console.log({ data });
+  // const { user, loading } = useFetchUser();
+
   return (
     <Layout user={null} loading={false}>
       <h1>Next.js and Auth0 Example</h1>

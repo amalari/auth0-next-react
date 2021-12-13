@@ -1,18 +1,21 @@
 import auth0 from "../../lib/auth0";
-
-const afterCallback = (req, res, session, state) => {
-  console.log({ session, state });
-  if (!session.user.isAdmin) {
-    throw new UnauthorizedError("User is not admin");
-  }
-  return session;
-};
+import cookie from "cookie";
 
 export default async function callback(req, res) {
   try {
-    await auth0.handleCallback(req, res, { afterCallback });
+    await auth0.handleCallback(req, res);
   } catch (error) {
+    console.error("callback error");
     console.error(error);
-    res.status(error.status || 500).end(error.message);
+    res.setHeader(
+      "Set-Cookie",
+      cookie.serialize(
+        "metax-alert",
+        JSON.stringify({ type: "error", message: error.message }),
+        { path: "/" }
+      )
+    );
+    res.redirect("/");
+    // res.status(error.status || 500).end(error.message);
   }
 }
