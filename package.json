@@ -9,6 +9,8 @@
     "@apollo/react-hooks": "^4.0.0",
     "@apollo/react-ssr": "^4.0.0",
     "@auth0/nextjs-auth0": "^1.4.2",
+    "@headlessui/react": "^1.4.2",
+    "@heroicons/react": "^1.0.5",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
     "apollo-link-context": "^1.0.20",
@@ -23,5 +25,10 @@
     "react-toastify": "^8.1.0",
     "swr": "^1.1.1",
     "tslib": "^2.2.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.5",
+    "tailwindcss": "^3.0.2"
   }
 }

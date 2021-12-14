@@ -1,11 +1,14 @@
 import { useUser } from "@auth0/nextjs-auth0";
 import useSWR from "swr";
-import Layout from "../components/layout";
-import { useFetchUser } from "../lib/user";
+import { Layout } from "../components";
 
 function Home() {
+  const { user, error, isLoading } = useUser();
+
+  if (isLoading) return <div>Loading...</div>;
+
   return (
-    <Layout user={null} loading={false}>
+    <Layout user={user}>
       <h1>Next.js and Auth0 Example</h1>
 
       {/* {loading && <p>Loading login info...</p>}

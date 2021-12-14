@@ -1,20 +1,14 @@
-import useSWR from "swr";
-import Layout from "../components/layout";
+import { Layout, EmailVerification } from "../components";
+import { useUser } from "@auth0/nextjs-auth0";
+import auth0 from "../lib/auth0";
 
 function Dashboard() {
-  const { data, error } = useSWR("/api/users", async (url) => {
-    // const accessToken = await getAccessTokenSilently({
-    //   audience: process.env.AUTH0_CLIENT_ID,
-    //   scope: process.env.AUTH0_SCOPE,
-    // });
-    const res = await fetch(url);
-    return res.json();
-  });
-  console.log({ data });
-  // const { user, loading } = useFetchUser();
+  const { user, error, isLoading } = useUser();
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
-    <Layout user={null} loading={false}>
+    <Layout user={user}>
       <h1>Next.js and Auth0 Example</h1>
 
       {/* {loading && <p>Loading login info...</p>}
@@ -41,6 +35,24 @@ function Dashboard() {
       )} */}
     </Layout>
   );
+}
+
+export async function getServerSideProps({ req, res }) {
+  // Here you can check authentication status directly before rendering the page,
+  // however the page would be a serverless function, which is more expensive and
+  // slower than a static page with client side authentication
+  const session = await auth0.getSession(req, res);
+  console.log({ session });
+  if (!session || !session.user) {
+    return {
+      redirect: {
+        destination: "/api/login",
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: { user: session.user } };
 }
 
 export default Dashboard;
