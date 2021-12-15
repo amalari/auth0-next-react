@@ -1,11 +1,10 @@
 import { Layout, EmailVerification } from "../components";
 import { useUser } from "@auth0/nextjs-auth0";
 import auth0 from "../lib/auth0";
+import { authMiddleware } from "../middlewares";
 
 function Dashboard() {
   const { user, error, isLoading } = useUser();
-
-  if (isLoading) return <div>Loading...</div>;
 
   return (
     <Layout user={user}>
@@ -38,21 +37,11 @@ function Dashboard() {
 }
 
 export async function getServerSideProps({ req, res }) {
-  // Here you can check authentication status directly before rendering the page,
-  // however the page would be a serverless function, which is more expensive and
-  // slower than a static page with client side authentication
   const session = await auth0.getSession(req, res);
-  console.log({ session });
-  if (!session || !session.user) {
-    return {
-      redirect: {
-        destination: "/api/login",
-        permanent: false,
-      },
-    };
-  }
+  const resAuthMiddleware = await authMiddleware(session);
+  if (resAuthMiddleware) return resAuthMiddleware;
 
-  return { props: { user: session.user } };
+  return { props: {} };
 }
 
 export default Dashboard;

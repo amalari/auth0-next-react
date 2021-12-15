@@ -1,6 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import emailVerifPic from "../public/img/email-verification.jpg";
 
 export const EmailVerification = ({
@@ -10,7 +11,6 @@ export const EmailVerification = ({
 }) => {
   const [countdown, setCountdown] = useState(0);
   useEffect(() => {
-    console.log("test");
     if (countdown > 0) {
       setTimeout(() => {
         setCountdown(countdown - 1);
@@ -66,17 +66,25 @@ export const EmailVerification = ({
                     <p className="text-sm text-gray-500">
                       Follow link to <b>{email}</b> to complete signup. If you
                       don’t see it, you may need to check your{" "}
-                      <b>spam folder.</b>
+                      <b>spam folder.</b> Please reload periodically if you have
+                      successfully verified your email.
                     </p>
                     <div className="mt-20">
                       {countdown === 0 ? (
-                        <button
-                          type="button"
-                          className="inline-flex justify-center px-4 py-2 text-sm font-medium text-yellow-900 bg-yellow-200 border border-transparent rounded-md hover:bg-yellow-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-yellow-600"
-                          onClick={() => setCountdown(60)}
-                        >
-                          Resend
-                        </button>
+                        <>
+                          <Link href="/">
+                            <a className="inline-flex mr-4 justify-center px-4 py-2 text-sm font-medium text-yellow-400 bg-white border border-yellow-400 rounded-md focus-visible:ring-2 focus-visible:ring-offset-2">
+                              Back to Home
+                            </a>
+                          </Link>
+                          <button
+                            type="button"
+                            className="inline-flex justify-center px-4 py-2 text-sm font-medium text-yellow-900 bg-yellow-200 border border-transparent rounded-md hover:bg-yellow-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-yellow-600"
+                            onClick={() => setCountdown(60)}
+                          >
+                            Resend
+                          </button>
+                        </>
                       ) : (
                         <button
                           disabled={true}
