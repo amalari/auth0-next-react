@@ -16,7 +16,7 @@ export const Layout = ({ user, children }) => {
 
       <main>
         <ToastContainer autoClose={8000} />
-        <div className="mx-72 my-6">{children}</div>
+        <div className="mx-32 my-6">{children}</div>
       </main>
     </div>
   );
