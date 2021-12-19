@@ -3,7 +3,7 @@ import { ToastContainer } from "react-toastify";
 import { Header } from "./Header";
 import { useToastAlert } from "../lib/toast";
 
-export const Layout = ({ isAuthenticated = false, children }) => {
+export const Layout = ({ isAuthenticated = false, isHome, children }) => {
   useToastAlert();
 
   return (
@@ -12,7 +12,7 @@ export const Layout = ({ isAuthenticated = false, children }) => {
         <title>Next.js with Auth0</title>
       </Head>
 
-      <Header isAuthenticated={isAuthenticated} />
+      <Header isAuthenticated={isAuthenticated} isHome={isHome} />
 
       <main>
         <ToastContainer autoClose={8000} />

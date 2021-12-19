@@ -7,7 +7,7 @@ function Home() {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <Layout isAuthenticated={user}>
+    <Layout isAuthenticated={user} isHome={true}>
       <h1>Next.js and Auth0 Example</h1>
 
       {/* {loading && <p>Loading login info...</p>}
