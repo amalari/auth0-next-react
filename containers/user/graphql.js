@@ -16,9 +16,16 @@ export const USERS = gql`
 `;
 
 export const UPDATE_PROFILE = gql`
-  mutation updateProfile($input: UpdateProfileInput) {
+  mutation updateProfile($input: UpdateProfileInput!) {
     updateProfile(input: $input) {
       id
+      email
+      name
+      picture
+      email_verified
+      created_at
+      last_login
+      logins_count
     }
   }
 `;

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import logo from "../public/img/logo.png";
 
-export const Header = ({ user }) => {
+export const Header = ({ isAuthenticated }) => {
   return (
     <div className="relative bg-white shadow-md">
       <div className="max-w-full">
@@ -11,7 +11,7 @@ export const Header = ({ user }) => {
             <Image src={logo} height={50} width={200} />
           </div>
           <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0 pr-32">
-            {user ? (
+            {isAuthenticated ? (
               <>
                 <Link href="/dashboard">
                   <a className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-yellow-400 rounded-md shadow-sm text-base font-medium text-yellow-400 bg-white hover:bg-yellow-400 hover:text-white">

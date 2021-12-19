@@ -4,6 +4,9 @@
 
 @layer components {
   .btn-primary {
-    @apply whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent shadow-sm text-base font-medium text-white bg-yellow-400 hover:bg-yellow-500;
+    @apply whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent shadow-sm text-base font-medium text-white bg-yellow-400 hover:bg-yellow-500 disabled:bg-gray-50 disabled:text-gray-500 disabled:border-gray-200 disabled:shadow-none disabled:cursor-not-allowed;
+  }
+  .btn-error {
+    @apply whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent shadow-sm text-base font-medium text-white bg-red-400 hover:bg-red-500 disabled:bg-gray-50 disabled:text-gray-500 disabled:border-gray-200 disabled:shadow-none disabled:cursor-not-allowed;
   }
 }
