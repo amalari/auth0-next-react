@@ -1,10 +1,16 @@
 import Table from "react-tailwind-table";
+import { useEffect } from "react";
 import { DateTime } from "luxon";
 import "react-tailwind-table/dist/index.css";
 import { useUsers } from "./graphql";
 
-export const UserTable = () => {
+export const UserTable = ({ setUserCounter }) => {
   const { data, loading, error } = useUsers();
+  useEffect(() => {
+    if (data) {
+      setUserCounter(data.users.length);
+    }
+  }, [data]);
   if (loading) return <p>Loading ...</p>;
 
   const rowcheck = (row, column, display_value) => {

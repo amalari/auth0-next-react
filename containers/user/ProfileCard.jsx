@@ -16,7 +16,7 @@ export const ProfileCardContainer = () => {
     useUpdateProfile();
   if (isLoading) return <div>Loading...</div>;
 
-  const handleSubmit = async (values, actions) => {
+  const handleSubmit = async (values, { resetForm }) => {
     await updateProfile({
       variables: {
         input: {
@@ -26,7 +26,7 @@ export const ProfileCardContainer = () => {
     });
     await checkSession();
     setIsEdit(false);
-    props.resetForm();
+    resetForm();
   };
 
   return (

@@ -38,7 +38,9 @@ export const ProfileCard = ({ item, onCancel, isEdit, onEdit, disabled }) => {
               )}
             </Field>
           ) : (
-            <h2 className="text-gray-800 text-3xl font-bold">{item.name}</h2>
+            <h2 className="text-gray-800 text-3xl font-bold break-words">
+              {item.name}
+            </h2>
           )}
           <p className="text-gray-400 mt-2">{item.email}</p>
         </div>
