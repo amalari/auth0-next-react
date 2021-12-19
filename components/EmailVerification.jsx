@@ -7,16 +7,9 @@ import emailVerifPic from "../public/img/email-verification.jpg";
 export const EmailVerification = ({
   isOpen = false,
   email = "",
-  resendIn = 60,
+  countdown,
+  onResend,
 }) => {
-  const [countdown, setCountdown] = useState(0);
-  useEffect(() => {
-    if (countdown > 0) {
-      setTimeout(() => {
-        setCountdown(countdown - 1);
-      }, 1000);
-    }
-  }, [countdown]);
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog
@@ -80,7 +73,7 @@ export const EmailVerification = ({
                           <button
                             type="button"
                             className="inline-flex justify-center px-4 py-2 text-sm font-medium text-yellow-900 bg-yellow-200 border border-transparent rounded-md hover:bg-yellow-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-yellow-600"
-                            onClick={() => setCountdown(60)}
+                            onClick={onResend}
                           >
                             Resend
                           </button>
@@ -92,7 +85,7 @@ export const EmailVerification = ({
                           className="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-900 bg-gray-200 border border-transparent rounded-md"
                           onClick={() => {}}
                         >
-                          {resendIn}
+                          {countdown}
                         </button>
                       )}
                     </div>

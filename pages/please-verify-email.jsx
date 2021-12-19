@@ -1,11 +1,8 @@
-import { EmailVerification } from "../components";
-import { useUser } from "@auth0/nextjs-auth0";
+import { EmailVerificationContainer } from "../containers";
 import auth0 from "../lib/auth0";
 
-function Dashboard({ user }) {
-  const { user: currentUser, error, isLoading } = useUser();
-
-  return <EmailVerification isOpen={true} email={user.email} />;
+function Dashboard() {
+  return <EmailVerificationContainer isOpen={true} />;
 }
 
 export async function getServerSideProps({ req, res }) {
@@ -28,8 +25,7 @@ export async function getServerSideProps({ req, res }) {
     };
   }
 
-  console.log({ user: session.user });
-  return { props: { user: session.user } };
+  return { props: {} };
 }
 
 export default Dashboard;

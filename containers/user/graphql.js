@@ -30,5 +30,13 @@ export const UPDATE_PROFILE = gql`
   }
 `;
 
+export const RESEND_EMAIL_VERIFICATION = gql`
+  mutation resendEmailVerification {
+    resendEmailVerification
+  }
+`;
+
 export const useUsers = (input) => useQuery(USERS, input);
 export const useUpdateProfile = (input) => useMutation(UPDATE_PROFILE, input);
+export const useResendEmailVerif = (input) =>
+  useMutation(RESEND_EMAIL_VERIFICATION, input);
