@@ -10,6 +10,7 @@ import { authMiddleware } from "../middlewares";
 
 const Dashboard = () => {
   const [userCounter, setUserCounter] = useState(0);
+  const [activeUserCounter, setActiveUserCounter] = useState(0);
   return (
     <Layout isAuthenticated={true}>
       <div className="grid grid-cols-10 gap-4">
@@ -17,8 +18,14 @@ const Dashboard = () => {
           <ProfileCardContainer />
         </div>
         <div className="col-span-7">
-          <StatsCardCointainer userCounter={userCounter} />
-          <UserTable setUserCounter={setUserCounter} />
+          <StatsCardCointainer
+            userCounter={userCounter}
+            activeUserCounter={activeUserCounter}
+          />
+          <UserTable
+            setUserCounter={setUserCounter}
+            setActiveUserCounter={setActiveUserCounter}
+          />
         </div>
       </div>
     </Layout>

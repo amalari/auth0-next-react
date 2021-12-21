@@ -16,12 +16,11 @@ export const USERS = gql`
 `;
 
 export const STATS = gql`
-  query dailyStats($from: String!, $to: String!) {
-    dailyStats(from: $from, to: $to) {
+  query dailyUserActiveLogs($from: String!, $to: String!) {
+    dailyUserActiveLogs(from: $from, to: $to) {
       id
       date
       logins
-      signups
     }
   }
 `;
@@ -48,7 +47,7 @@ export const RESEND_EMAIL_VERIFICATION = gql`
 `;
 
 export const useUsers = (input) => useQuery(USERS, input);
-export const useDailyStats = (input) => useQuery(STATS, input);
+export const useDailyUserActiveLogs = (input) => useQuery(STATS, input);
 export const useUpdateProfile = (input) => useMutation(UPDATE_PROFILE, input);
 export const useResendEmailVerif = (input) =>
   useMutation(RESEND_EMAIL_VERIFICATION, input);

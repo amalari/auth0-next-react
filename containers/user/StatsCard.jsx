@@ -6,9 +6,10 @@ import {
 import { DateTime } from "luxon";
 import { useState, useEffect } from "react";
 import { StatsCard } from "../../components";
-import { useDailyStats } from "./graphql";
+import { useDailyUserActiveLogs } from "./graphql";
 
-export const StatsCardCointainer = ({ userCounter }) => {
+export const StatsCardCointainer = ({ userCounter, activeUserCounter }) => {
+  console.log({ userCounter, activeUserCounter });
   const from = DateTime.now().minus({ days: 7 }).toFormat("yyyyMMdd");
   const to = DateTime.now().toFormat("yyyyMMdd");
 
@@ -20,7 +21,7 @@ export const StatsCardCointainer = ({ userCounter }) => {
       color: "purple",
     },
     {
-      stat: 0,
+      stat: activeUserCounter,
       label: "Active Users Today",
       icon: <CalendarIcon />,
       color: "blue",
@@ -32,7 +33,7 @@ export const StatsCardCointainer = ({ userCounter }) => {
       color: "green",
     },
   ]);
-  const { data, loading, error } = useDailyStats({
+  const { data, loading, error } = useDailyUserActiveLogs({
     variables: { from, to },
   });
   useEffect(() => {
@@ -45,27 +46,19 @@ export const StatsCardCointainer = ({ userCounter }) => {
         color: "purple",
       };
     }
-    if (data?.dailyStats) {
-      if (data.dailyStats.length > 0) {
-        const firstStats = data.dailyStats[data.dailyStats.length - 1];
-        console.log(DateTime.now().toISO());
-        console.log(DateTime.now().toUTC().toISO());
-        const diffNow = DateTime.now()
-          .toUTC()
-          .diff(DateTime.fromISO(firstStats.date), "days")
-          .toObject();
-        if (diffNow.days < 1) {
-          newStats[1] = {
-            stat: firstStats.logins,
-            label: "Active Users Today",
-            icon: <CalendarIcon />,
-            color: "blue",
-          };
-        }
-
+    if (activeUserCounter !== newStats[1].stat) {
+      newStats[1] = {
+        stat: activeUserCounter,
+        label: "Active Users Today",
+        icon: <CalendarIcon />,
+        color: "blue",
+      };
+    }
+    if (data?.dailyUserActiveLogs) {
+      if (data.dailyUserActiveLogs.length > 0) {
         // avg calculations
         let totalLogins = 0;
-        for (const dailyStat of data.dailyStats) {
+        for (const dailyStat of data.dailyUserActiveLogs) {
           totalLogins += dailyStat.logins;
         }
         newStats[2] = {
@@ -77,7 +70,7 @@ export const StatsCardCointainer = ({ userCounter }) => {
       }
     }
     setStats(newStats);
-  }, [userCounter, data]);
+  }, [userCounter, activeUserCounter, data]);
 
   if (loading) return <></>;
   return (

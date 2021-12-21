@@ -4,11 +4,22 @@ import { DateTime } from "luxon";
 import "react-tailwind-table/dist/index.css";
 import { useUsers } from "./graphql";
 
-export const UserTable = ({ setUserCounter }) => {
+export const UserTable = ({ setUserCounter, setActiveUserCounter }) => {
   const { data, loading, error } = useUsers();
   useEffect(() => {
     if (data) {
       setUserCounter(data.users.length);
+      let activeUserToday = 0;
+      let currentDate = DateTime.now().toUTC();
+
+      for (const user of data.users) {
+        const diffNow = currentDate
+          .diff(DateTime.fromISO(user.last_login), "days")
+          .toObject();
+        console.log(diffNow);
+        if (diffNow.days < 1) activeUserToday += 1;
+      }
+      setActiveUserCounter(activeUserToday);
     }
   }, [data]);
   if (loading) return <p>Loading ...</p>;
