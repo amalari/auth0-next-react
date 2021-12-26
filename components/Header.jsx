@@ -1,12 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import PropTypes from "prop-types";
 import logo from "../public/img/logo.png";
 
-export const Header = ({
-  isAuthenticated,
-  isHome = false,
-  isLoading = false,
-}) => {
+const Header = ({ isAuthenticated, isHome = false, isLoading = false }) => {
   return (
     <div className="relative bg-white shadow-md">
       <div className="max-w-full">
@@ -49,3 +46,11 @@ export const Header = ({
     </div>
   );
 };
+
+Header.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  isHome: PropTypes.bool,
+  isLoading: PropTypes.bool,
+};
+
+export { Header };

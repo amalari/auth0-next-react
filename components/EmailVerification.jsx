@@ -1,14 +1,15 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState, useEffect } from "react";
+import { Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import PropTypes from "prop-types";
 import emailVerifPic from "../public/img/email-verification.jpg";
 
-export const EmailVerification = ({
+const EmailVerification = ({
   isOpen = false,
   email = "",
   countdown,
-  onResend,
+  onResend = () => {},
 }) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -102,3 +103,12 @@ export const EmailVerification = ({
     </Transition>
   );
 };
+
+EmailVerification.propTypes = {
+  isOpen: PropTypes.bool,
+  email: PropTypes.string,
+  countdown: PropTypes.number.isRequired,
+  onResend: PropTypes.func,
+};
+
+export { EmailVerification };

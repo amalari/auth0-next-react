@@ -1,6 +1,7 @@
 import { Field } from "formik";
+import PropTypes from "prop-types";
 
-export const ProfileCard = ({ item, onCancel, isEdit, onEdit, disabled }) => {
+const ProfileCard = ({ item, onCancel, isEdit, onEdit, disabled }) => {
   return (
     <div className="container w-full bg-white shadow-lg transform duration-200 easy-in-out">
       <div className=" h-32 overflow-hidden">
@@ -68,3 +69,13 @@ export const ProfileCard = ({ item, onCancel, isEdit, onEdit, disabled }) => {
     </div>
   );
 };
+
+ProfileCard.propTypes = {
+  item: PropTypes.object.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  isEdit: PropTypes.bool.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
+};
+
+export { ProfileCard };

@@ -1,9 +1,10 @@
 import Head from "next/head";
 import { ToastContainer } from "react-toastify";
+import PropTypes from "prop-types";
 import { Header } from "./Header";
 import { useToastAlert } from "../lib/toast";
 
-export const Layout = ({
+const Layout = ({
   isAuthenticated = false,
   isHome,
   isLoading = false,
@@ -30,3 +31,12 @@ export const Layout = ({
     </div>
   );
 };
+
+Layout.propTypes = {
+  isAuthenticated: PropTypes.bool,
+  isHome: PropTypes.bool,
+  isLoading: PropTypes.bool,
+  children: PropTypes.node.isRequired,
+};
+
+export { Layout };

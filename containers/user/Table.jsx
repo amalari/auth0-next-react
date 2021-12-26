@@ -61,39 +61,39 @@ export const UserTable = ({ setUserCounter, setActiveUserCounter }) => {
       styling={{ main: "shadow-none" }}
       columns={[
         {
-          // use_in_display: false,
-          field: "picture", //Object destructure
+          use_in_search: false,
+          field: "picture",
           use: "Picture",
         },
         {
           // use_in_display: false,
-          field: "email", //Object destructure
+          field: "email",
           use: "Email",
         },
         {
           // use_in_display: false,
-          field: "name", //Object destructure
+          field: "name",
           use: "Name",
         },
         {
-          // use_in_display: false,
-          field: "email_verified", //Object destructure
+          field: "email_verified",
           use: "Email Verified",
+          use_in_search: false,
         },
         {
           field: "created_at",
           use: "Sign Up At",
-          // use_in_search:false
+          use_in_search: false,
         },
         {
           field: "logins_count",
           use: "Logins Count",
-          // use_in_search:false
+          use_in_search: false,
         },
         {
           field: "last_login",
           use: "Last Login",
-          // use_in_search:false
+          use_in_search: false,
         },
       ]}
       rows={data.users}

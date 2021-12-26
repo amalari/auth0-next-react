@@ -1,4 +1,6 @@
-export const StatsCard = ({ icon, stat, label, color }) => {
+import PropTypes from "prop-types";
+
+const StatsCard = ({ icon, stat, label, color }) => {
   let borderColor;
   let bgIconColor;
   switch (color) {
@@ -35,3 +37,12 @@ export const StatsCard = ({ icon, stat, label, color }) => {
     </div>
   );
 };
+
+StatsCard.propTypes = {
+  icon: PropTypes.string.isRequired,
+  stat: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+};
+
+export { StatsCard };
