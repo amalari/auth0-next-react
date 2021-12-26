@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { ProfileCard } from "../../components";
+import { ProfileCard, ProfileCardLoading } from "../../components";
 import { useUpdateProfile } from "./graphql";
 
 const UpdateProfileSchema = Yup.object().shape({
@@ -14,7 +14,7 @@ export const ProfileCardContainer = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [updateProfile, { data, loading, error: updateError }] =
     useUpdateProfile();
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <ProfileCardLoading />;
 
   const handleSubmit = async (values, { resetForm }) => {
     await updateProfile({

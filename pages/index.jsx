@@ -8,10 +8,10 @@ const classNames = (...classes) => {
 function Home() {
   const { user, error, isLoading } = useUser();
 
-  if (isLoading) return <div>Loading...</div>;
+  // if (isLoading) return <div>Loading...</div>;
 
   return (
-    <Layout isAuthenticated={user} isHome={true}>
+    <Layout isAuthenticated={user} isHome={true} isLoading={isLoading}>
       <h1 className="font-semibold text-3xl">Documentation</h1>
 
       <div className="w-full py-6">

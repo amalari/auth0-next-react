@@ -5,11 +5,10 @@ import {
 } from "@heroicons/react/solid";
 import { DateTime } from "luxon";
 import { useState, useEffect } from "react";
-import { StatsCard } from "../../components";
+import { StatsCard, StatsCardLoading } from "../../components";
 import { useDailyUserActiveLogs } from "./graphql";
 
 export const StatsCardCointainer = ({ userCounter, activeUserCounter }) => {
-  console.log({ userCounter, activeUserCounter });
   const from = DateTime.now().minus({ days: 7 }).toFormat("yyyyMMdd");
   const to = DateTime.now().toFormat("yyyyMMdd");
 
@@ -72,12 +71,11 @@ export const StatsCardCointainer = ({ userCounter, activeUserCounter }) => {
     setStats(newStats);
   }, [userCounter, activeUserCounter, data]);
 
-  if (loading) return <></>;
   return (
     <div className="flex flex-row mb-6 space-x-4">
       {stats.map((item) => (
         <div className="w-1/3" key={item.label}>
-          <StatsCard {...item} />
+          {loading ? <StatsCardLoading /> : <StatsCard {...item} />}
         </div>
       ))}
     </div>
